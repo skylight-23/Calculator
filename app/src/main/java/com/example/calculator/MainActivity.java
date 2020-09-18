@@ -2,6 +2,7 @@ package com.example.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +21,7 @@ import java.util.regex.Pattern;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button bt_0, bt_1, bt_2, bt_3, bt_4, bt_5, bt_6, bt_7,
             bt_8, bt_9, bt_delete, bt_div, bt_mult, bt_minus, bt_plus, bt_is, bt_dot, bt_AC, bt_left, bt_right, bt_sc, bt_help,
-            bt_sin,bt_cos,bt_tan;
+            bt_sin,bt_cos,bt_tan,bt_108,bt_1016,bt_102,bt_mi,bt_fang,bt_dao,bt_ou;
 
     private TextView showText;             //用来显示输入的符号和数字
     private String input = "";           //字符串用来保存输入的数字和符号
@@ -61,6 +62,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View bt_sin = findViewById(R.id.bt_sin);//sin
         View bt_cos = findViewById(R.id.bt_cos);//cos
         View bt_tan = findViewById(R.id.bt_tan);
+        View bt_108 = findViewById(R.id.bt_108);//十进制转8进制
+        View bt_102 = findViewById(R.id.bt_102);//十进制转2进制
+        View bt_1016 = findViewById(R.id.bt_1016);//十进制转16进制
+        View bt_mi = findViewById(R.id.bt_mi);
+        View bt_fang = findViewById(R.id.bt_fang);
+        View bt_dao = findViewById(R.id.bt_dao);
+        View bt_ou = findViewById(R.id.bt_ou);
         showText = (TextView) findViewById(R.id.showText);//结果栏
 
         bt_0.setOnClickListener(this);
@@ -75,20 +83,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bt_9.setOnClickListener(this);
         bt_AC.setOnClickListener(this);
         bt_delete.setOnClickListener(this);
-        bt_div.setOnClickListener(this);
-        bt_div.setOnClickListener(this);
-        bt_dot.setOnClickListener(this);
-        bt_is.setOnClickListener(this);
-        bt_minus.setOnClickListener(this);
-        bt_mult.setOnClickListener(this);
-        bt_plus.setOnClickListener(this);
         bt_left.setOnClickListener(this);
         bt_right.setOnClickListener(this);
         bt_help.setOnClickListener(this);
         bt_sc.setOnClickListener(this);
         bt_sin.setOnClickListener(this);
         bt_cos.setOnClickListener(this);
-        bt_tan.setOnClickListener(this);
+
+
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            Log.i("info","landscape"); // 横屏
+            bt_tan.setOnClickListener(this);
+            bt_102.setOnClickListener(this);
+            bt_108.setOnClickListener(this);
+            bt_1016.setOnClickListener(this);
+            bt_mi.setOnClickListener(this);
+            bt_fang.setOnClickListener(this);
+            bt_dao.setOnClickListener(this);
+            bt_ou.setOnClickListener(this);
+        } else if(this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            Log.i("info","portrait"); // 竖屏
+            bt_div.setOnClickListener(this);
+            bt_dot.setOnClickListener(this);
+            bt_is.setOnClickListener(this);
+            bt_minus.setOnClickListener(this);
+            bt_mult.setOnClickListener(this);
+            bt_plus.setOnClickListener(this);
+            bt_is.setOnClickListener(this);
+            bt_minus.setOnClickListener(this);
+            bt_mult.setOnClickListener(this);
+            bt_plus.setOnClickListener(this);
+        }
+
     }
 
     public void onClick(View view) {
@@ -196,6 +222,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 double t =getTan(showText.getText().toString());
                 showText.setText(""+t);
                 break;
+            case R.id.bt_102:
+                int two = Integer.parseInt(showText.getText().toString());
+                showText.setText(""+Integer.toBinaryString(two));
+                break;
+            case R.id.bt_108:
+                int b = Integer.parseInt(showText.getText().toString());
+                showText.setText(""+Integer.toOctalString(b));
+                break;
+            case R.id.bt_1016:
+                int sl = Integer.parseInt(showText.getText().toString());
+                showText.setText(""+Integer.toHexString(sl));
+                break;
+            case R.id.bt_dao:
+                int dao = Integer.parseInt(showText.getText().toString());
+                showText.setText(""+dao*0.148);
+                break;
+            case R.id.bt_ou:
+                int ou = Integer.parseInt(showText.getText().toString());
+                showText.setText(""+ou*0.115);
+                break;
+            case R.id.bt_mi:
+                double mi = Double.parseDouble(showText.getText().toString());
+                showText.setText(""+mi*10+"dm  "+mi*100+"cm");
+                break;
+            case R.id.bt_fang:
+                double bian = Double.parseDouble(showText.getText().toString());
+                showText.setText(""+bian*bian*bian+"立方米");
         }
 
 
