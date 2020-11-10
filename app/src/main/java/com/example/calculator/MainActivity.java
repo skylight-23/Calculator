@@ -2,6 +2,7 @@ package com.example.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -207,7 +208,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 showText.setText(input);
                 break;
             case R.id.bt_help:
-                Toast.makeText(this,"这是帮助",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this,Help.class);
+                startActivity(intent);
                 break;
             case R.id.bt_sin:
                 double a = getSin(showText.getText().toString());
@@ -253,6 +255,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+
     public double getSin(String s){
         double x = Double.parseDouble(s);
         double y = Math.sin(pi / 180 * x);
